@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>回复：扫描件能不能直接存成 PDF · 轩扫描 XuanScan</title>
+<meta name="description" content="page.summary">
+<link rel="stylesheet" href="../../../../assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F26B14'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%BD%A9%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="../../../../" class="logo">
+      <span class="logo-mark">轩</span>
+      <span class="logo-text">轩扫描<em>XuanScan</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="../../../../" >主页</a>
+      <a href="../../../../download.html" >下载</a>
+      <a href="../../../../docs.html" >使用教程</a>
+      <a href="../../../../faq.html" >常见问题</a>
+      <a href="../../../../changelog.html" >更新日志</a>
+      <a href="../../../../about.html" >关于</a>
+    </nav>
+    <div class="header-cta">
+      <a href="../../../../feed.html" class="btn btn-ghost btn-sm">消息中心</a>
+      <a href="https://github.com/eFreeLab/XuanScan" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="menu-toggle" id="menuBtn" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+<article class="post">
+  <div class="post-head">
+    <span class="tag tag-reply">反馈回复</span>
+    
+    
+  </div>
+
+  <h1>回复：扫描件能不能直接存成 PDF</h1>
+  <p class="post-meta">2026-09-08 20:10 · 轩扫描 XuanScan</p>
+
+  
+  <div class="post-summary">能。PDF 导出排在 M2，且不用引入任何 GPL 依赖。</div>
+  
+
+  <p>收到回执码 <strong>8F3K2Q</strong> 的反馈：「拍完能不能直接存 PDF，一张张 PNG 发给老师太麻烦了。」</p>
+<h2>答复</h2>
+<p>能，而且已经在计划里，<strong>M2 就做</strong>。</p>
+<h2>为什么不是现在</h2>
+<p>M0 的目标是把「相机 → 扫描 → PNG」这条链跑通，先把画质和稳定性钉死，再往上堆功能。 多页管理和 PDF 需要一套页面顺序、增删、重排的数据结构，属于下一阶段。</p>
+<h2>技术上怎么实现（不用 GPL 库）</h2>
+<ul><li><strong>PDF</strong>：直接用 Android 自带的 <code>android.graphics.pdf.PdfDocument</code>，零依赖</li><li><strong>DOCX</strong>：手写 OOXML + <code>ZipOutputStream</code> 打包</li><li>刻意<strong>不用</strong> iText（AGPL，商用要授权）、不用 Apache POI（体积过大）</li></ul>
+<h2>会做成什么样</h2>
+<p>多页扫描 → 长按拖动排序 → 一键「导出 PDF」→ 存到 <code>Download/轩扫描/</code>。 内测版还会给一个「导出备份 .xscanbak」的选项，换手机时不丢错题本。</p>
+
+  
+  <div class="receipt-box">
+    <div class="receipt-label">本条为回执回复</div>
+    <div class="receipt-code">8F3K2Q</div>
+    <div class="receipt-hint">提交反馈时生成过这个回执码的用户，App 端会收到「你的反馈有回复了」提醒。</div>
+  </div>
+  
+
+  
+
+  
+
+  <p class="back"><a href="../../../../">← 返回消息中心</a></p>
+</article>
+
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="../../../../" class="logo" style="margin-bottom:10px">
+          <span class="logo-mark">轩</span>
+          <span class="logo-text">轩扫描<em>XuanScan</em></span>
+        </a>
+        <p style="margin:0;max-width:320px">拍一张试卷，去掉手写笔迹，还原成干净的空白卷。所有处理都在手机本地完成。</p>
+      </div>
+      <div>
+        <h4>产品</h4>
+        <ul>
+          <li><a href="../../../../download.html">下载安装</a></li>
+          <li><a href="../../../../docs.html">使用教程</a></li>
+          <li><a href="../../../../faq.html">常见问题</a></li>
+          <li><a href="../../../../changelog.html">更新日志</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>动态</h4>
+        <ul>
+          <li><a href="../../../../feed.html">消息中心</a></li>
+          <li><a href="../../../../app-preview.html">App 界面模拟</a></li>
+          <li><a href="../../../../about.html">关于项目</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="../../../../api/v1/feed.json">feed.json</a></li>
+          <li><a href="../../../../api/v1/version.json">version.json</a></li>
+          <li><a href="../../../../api/v1/config.json">config.json</a></li>
+          <li><a href="https://github.com/eFreeLab/XuanScan" target="_blank" rel="noopener">源码仓库</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>轩扫描官方中枢 —— 版本公告、Bug 回复、更新自查、内测分发</span>
+      <span>本页由 GitHub Pages + Jekyll 自动构建 · 无后端 · 无 Cookie · 无统计脚本</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('menuBtn').onclick = function(){
+  document.getElementById('mainNav').classList.toggle('open');
+};
+</script>
+</body>
+</html>

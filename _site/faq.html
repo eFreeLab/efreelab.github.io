@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>常见问题 · 轩扫描 XuanScan</title>
+<meta name="description" content="轩扫描常见问题：会不会中毒、要不要联网、照片会不会上传、擦不干净怎么办、内测版与商业版区别">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F26B14'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%BD%A9%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="./" class="logo">
+      <span class="logo-mark">轩</span>
+      <span class="logo-text">轩扫描<em>XuanScan</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="./" >主页</a>
+      <a href="./download.html" >下载</a>
+      <a href="./docs.html" >使用教程</a>
+      <a href="./faq.html" class="active">常见问题</a>
+      <a href="./changelog.html" >更新日志</a>
+      <a href="./about.html" >关于</a>
+    </nav>
+    <div class="header-cta">
+      <a href="./feed.html" class="btn btn-ghost btn-sm">消息中心</a>
+      <a href="https://github.com/eFreeLab/XuanScan" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="menu-toggle" id="menuBtn" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+
+<section class="section" style="padding-top:36px">
+<div class="wrap">
+
+  <div class="sec-head">
+    <h2>常见问题</h2>
+    <p>提问前先翻翻，八成问题这里都有</p>
+  </div>
+
+  <details class="faq-item" open>
+    <summary>安装时提示「风险应用」「发现病毒」，是真的中毒了吗？</summary>
+    <div class="a">
+      <p>不是。这是 Android 对所有<b>「非应用商店来源 APK」的统一提示</b>，跟你从哪儿下的、软件干什么的无关。</p>
+      <p>只要你是在本网站的<b>蓝奏云</b>或<b>GitHub Releases</b>下载的，就可以放心继续安装。</p>
+      <p>轩扫描在开发时刻意规避了几类最容易引发误报的做法：<b>不使用第三方加固壳、不动态加载 DEX/SO、不申请通讯录/定位/短信等无关权限</b>。这些都是手机管家判定风险的高权重特征。</p>
+      <p>想自己验证：装完后用手机管家扫一遍，或把 APK 传到 <a href="https://www.virustotal.com/" target="_blank" rel="noopener">VirusTotal</a> 看看。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>我的照片会被上传到服务器吗？</summary>
+    <div class="a">
+      <p><b>不会。</b>扫描、透视校正、黑白处理、笔迹擦除、OCR 全部在手机本地完成。</p>
+      <p>App 唯一的网络请求是「检查更新」时读取本站的一个静态 JSON 文件，这个请求里<b>不包含任何照片、账号或设备标识</b>。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>不联网能用吗？</summary>
+    <div class="a">
+      <p><b>能。</b>拍照、扫描、擦除、导出这些核心功能完全离线可用。</p>
+      <p>只有「检查更新」「AI 解题」这类功能需要联网。AI 解题是可选的，不配置也能正常使用其他所有功能。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>为什么要相机权限？不给行不行？</summary>
+    <div class="a">
+      <p>不给就没法拍照扫描，App 的核心功能用不了。</p>
+      <p>轩扫描一共只申请 <b>3 个权限</b>：相机（拍照）、读取相册（导入已有照片）、网络（检查更新）。
+         没有通讯录、定位、短信、通话记录，也没有「读取已安装应用列表」这类容易被误会的权限。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>边缘自动识别不准怎么办？</summary>
+    <div class="a">
+      <p>直接<b>手动拖四个角</b>就好，一样准，而且所见即所得。</p>
+      <p>识别失败的常见原因：纸张和桌面颜色太接近、地面/桌面有强反光、纸没拍全、背景太杂乱。
+         换一个对比度高的背景（比如深色桌面拍白纸）成功率会高很多。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>手写笔迹擦不干净 / 把印刷字也擦掉了，怎么办？</summary>
+    <div class="a">
+      <p>两种情况都有兜底：</p>
+      <p>① <b>擦不干净</b>：多半是笔迹颜色和印刷字太接近。改用<b>「空白卷模板差分」</b>——借同学一张没写过的同版卷子扫进来当模板，效果会好非常多。</p>
+      <p>② <b>擦错了</b>：被误擦的地方<b>可以手动补写回来</b>，App 在关键位置也会先提示你确认。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>内测版和商业版有什么区别？会不会突然收费？</summary>
+    <div class="a">
+      <p>内测版用于开发测试，功能完整、<b>当前免费</b>，但数据是内部版本，不保证向后兼容。</p>
+      <p>商业版会有正式的数据迁移与保障、上架应用商店（不再有风险提示）、以及后续的企业/学校功能。</p>
+      <p>如果未来内测版需要停止免费，App 内会<b>提前给出通知并引导升级</b>，不会静默停用。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>支持 iOS / 鸿蒙吗？</summary>
+    <div class="a">
+      <p><b>目前只有 Android</b>。</p>
+      <p>HarmonyOS 4 及以下一般可以直接安装 Android APK；纯血鸿蒙（HarmonyOS NEXT）暂不支持。
+         iOS 需要开发者账号（年费 688 元），在内测阶段暂不投入，等商业版再说。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>扫描件存在哪里？会占手机空间吗？</summary>
+    <div class="a">
+      <p>存在 App 私有目录里，卸载 App 会一起清掉；主动「保存到相册」的会留在系统相册的「轩扫描」文件夹，卸载后仍在。</p>
+      <p>一页 A4 高清黑白扫描件大约 200 KB – 1 MB，比原照片小很多。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>遇到 Bug / 想提建议，怎么反馈？</summary>
+    <div class="a">
+      <p>App 内「设置 → 反馈」可以<b>一键生成回执码</b>并复制反馈内容，粘贴到
+         <a href="https://github.com/eFreeLab/XuanScan/issues" target="_blank" rel="noopener">GitHub Issues</a>
+         或发给开发者都行。</p>
+      <p>带着回执码的反馈，开发者回复后你可以在 App 的
+         <a href="./feed.html">消息中心</a> 里直接看到针对性回复。</p>
+    </div>
+  </details>
+
+  <details class="faq-item">
+    <summary>为什么不用应用商店下载？</summary>
+    <div class="a">
+      <p>内测阶段走应用商店需要软著、备案、开发者账号等一整套手续，成本和时间都不划算。</p>
+      <p>先用官网 + 网盘分发，等商业版再上架。这也是为什么安装时会有「未知来源」提示。</p>
+    </div>
+  </details>
+
+</div>
+</section>
+
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="./" class="logo" style="margin-bottom:10px">
+          <span class="logo-mark">轩</span>
+          <span class="logo-text">轩扫描<em>XuanScan</em></span>
+        </a>
+        <p style="margin:0;max-width:320px">拍一张试卷，去掉手写笔迹，还原成干净的空白卷。所有处理都在手机本地完成。</p>
+      </div>
+      <div>
+        <h4>产品</h4>
+        <ul>
+          <li><a href="./download.html">下载安装</a></li>
+          <li><a href="./docs.html">使用教程</a></li>
+          <li><a href="./faq.html">常见问题</a></li>
+          <li><a href="./changelog.html">更新日志</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>动态</h4>
+        <ul>
+          <li><a href="./feed.html">消息中心</a></li>
+          <li><a href="./app-preview.html">App 界面模拟</a></li>
+          <li><a href="./about.html">关于项目</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="./api/v1/feed.json">feed.json</a></li>
+          <li><a href="./api/v1/version.json">version.json</a></li>
+          <li><a href="./api/v1/config.json">config.json</a></li>
+          <li><a href="https://github.com/eFreeLab/XuanScan" target="_blank" rel="noopener">源码仓库</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>轩扫描官方中枢 —— 版本公告、Bug 回复、更新自查、内测分发</span>
+      <span>本页由 GitHub Pages + Jekyll 自动构建 · 无后端 · 无 Cookie · 无统计脚本</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('menuBtn').onclick = function(){
+  document.getElementById('mainNav').classList.toggle('open');
+};
+</script>
+</body>
+</html>

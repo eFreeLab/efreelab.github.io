@@ -1,0 +1,60 @@
+# ============================================================
+# 轩扫描官方中枢 · Jekyll 配置
+# 设计原则：
+#   1) plugins 留空 —— GitHub Pages 只认白名单插件，
+#      所有动态能力（feed/version JSON）都用 Liquid 模板实现，
+#      Liquid 不算插件，因此不受白名单限制。
+#   2) 不用任何远程主题（minima 等），自带 CSS，避免供应链与样式绑架。
+#   3) exclude 掉本地预览脚本，别让它被推上 Pages。
+# ============================================================
+
+title: 轩扫描 XuanScan
+description: 轩扫描官方中枢 —— 版本公告、Bug 回复、更新自查、内测分发
+lang: zh-CN
+
+url: https://efreelab.github.io
+baseurl: ""
+
+timezone: Asia/Shanghai
+
+# 只收录 XuanScan 相关的展示参数（App 端通过 front-matter 的 xscan.* 读取）
+markdown: kramdown
+kramdown:
+  input: GFM
+  hard_wrap: false
+  syntax_highlighter: rouge
+
+# 未来日期的文章不发布（防止误发预告）
+future: false
+unpublished: false
+
+# 文章固定链接：/2026/09/13/slug/
+permalink: /:year/:month/:day/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: posts
+    values:
+      layout: post
+      comments: true
+
+exclude:
+  - scripts/
+  - README.md
+  - Gemfile
+  - Gemfile.lock
+  - vendor/
+  - _site/
+  - .gitignore
+
+# ------------------------------------------------------------
+# 自定义集合：不需要，文章全放 _posts，靠 xscan.app 字段区分应用
+# （将来接第二个 App 时，只要 front-matter 写 xscan.app: otherapp 即可）
+# ------------------------------------------------------------
+
+plugins: []
+
+# 仓库地址（页头 GitHub 按钮与页脚用）
+# 注意：不要叫 site.github，那是 GitHub Pages 的保留字段，会被覆盖
+repo: https://github.com/eFreeLab/XuanScan

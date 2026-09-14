@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>使用教程 · 轩扫描 XuanScan</title>
+<meta name="description" content="轩扫描使用教程：拍照扫描、调整四角、选择扫描档位、擦除手写笔迹、导出 PDF 与错题本的完整步骤">
+<link rel="stylesheet" href="./assets/css/style.css">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='22' fill='%23F26B14'/%3E%3Ctext x='50' y='68' font-size='58' text-anchor='middle' fill='white' font-family='sans-serif' font-weight='bold'%3E%E8%BD%A9%3C/text%3E%3C/svg%3E">
+</head>
+<body>
+<header class="site-header">
+  <div class="header-inner">
+    <a href="./" class="logo">
+      <span class="logo-mark">轩</span>
+      <span class="logo-text">轩扫描<em>XuanScan</em></span>
+    </a>
+    <nav class="main-nav" id="mainNav">
+      <a href="./" >主页</a>
+      <a href="./download.html" >下载</a>
+      <a href="./docs.html" class="active">使用教程</a>
+      <a href="./faq.html" >常见问题</a>
+      <a href="./changelog.html" >更新日志</a>
+      <a href="./about.html" >关于</a>
+    </nav>
+    <div class="header-cta">
+      <a href="./feed.html" class="btn btn-ghost btn-sm">消息中心</a>
+      <a href="https://github.com/eFreeLab/XuanScan" class="btn btn-primary btn-sm" target="_blank" rel="noopener">GitHub</a>
+    </div>
+    <button class="menu-toggle" id="menuBtn" aria-label="打开导航菜单"><span></span><span></span><span></span></button>
+  </div>
+</header>
+
+
+
+<section class="section" style="padding-top:36px">
+<div class="wrap">
+
+  <div class="sec-head">
+    <h2>使用教程</h2>
+    <p>按功能分节，哪一节不会就点哪一节</p>
+  </div>
+
+  <div class="doc-body">
+
+    <h2 id="scan">一、拍照扫描</h2>
+    <ol>
+      <li>打开轩扫描，首页点<b>「拍照扫描」</b>。</li>
+      <li>把试卷平铺，四角尽量放进屏幕上的取景框，<b>尽量填满画面</b>——拍得越满，出来的字越清晰。</li>
+      <li>光线暗的点右上角<b>闪光灯</b>图标；注意别让自己的影子挡住纸面。</li>
+      <li>点快门拍照。也可以点左下角图标<b>从相册导入</b>已经拍好的照片。</li>
+    </ol>
+
+    <h3>调整边框</h3>
+    <p>
+      拍完会进入「调整边框」页。App 会先<b>自动识别</b>纸张四角；
+      不准的话直接<b>用手指拖四个圆点</b>贴到纸的四个角上，框外会自动压暗。
+    </p>
+    <div class="tip">
+      <b>识别不准怎么办：</b>纸和桌面颜色太接近、地面反光、纸没拍全时容易识别失败，
+      这时会提示「没找到清晰边缘」——手动拖四角即可，一样准。
+    </div>
+
+    <h3>选扫描档位</h3>
+    <table>
+      <tr><th>档位</th><th>适合什么</th></tr>
+      <tr><td>高清黑白</td><td><b>最常用。</b>纯文字试卷、练习题，字迹最清晰、文件最小</td></tr>
+      <tr><td>灰度</td><td>要保留一点层次，比如铅笔画的图</td></tr>
+      <tr><td>增强</td><td>有图表、照片的页面，自动拉平光照</td></tr>
+      <tr><td>原图</td><td>不想做任何处理，只做透视校正</td></tr>
+    </table>
+
+    <h2 id="erase">二、擦掉手写笔迹</h2>
+    <p>
+      在结果页点<b>「擦除笔迹」</b>。轩扫描会用四层策略处理：
+    </p>
+    <ol>
+      <li><b>颜色分离</b>：先把红笔、蓝笔这类明显不同于印刷黑字的颜色挑出来。</li>
+      <li><b>形态区分</b>：印刷字每个同字形状几乎一样，手写却因人而异——按形状聚类把两者分开。</li>
+      <li><b>空白卷差分</b>：如果你手上有一张<b>没写过的同版卷子</b>，扫进来当模板，
+          两图对齐后直接把差异部分用模板像素填掉，效果最好。</li>
+      <li><b>人工兜底</b>：关键位置会被提示让你确认；擦错了的地方<b>可以手动补写回来</b>。</li>
+    </ol>
+    <div class="tip">
+      <b>学生党用法：</b>卷子已经写完了才想起来要擦？
+      借同学一张<b>没写过的同版卷子</b>扫一下当模板，效果远好于纯自动擦除。
+    </div>
+
+    <h2 id="export">三、导出与分享</h2>
+    <ul>
+      <li><b>保存 PNG</b>：结果页点「保存到相册」，图片会存到系统相册的<b>「轩扫描」</b>文件夹。</li>
+      <li><b>分享</b>：点「分享」直接发给微信 / QQ，不会往公共存储里塞垃圾文件。</li>
+      <li><b>导出 PDF</b>：多页扫描后在文件页选「合并为 PDF」，按页码顺序排好即可打印。</li>
+    </ul>
+
+    <h2 id="mistakes">四、错题本</h2>
+    <p>
+      擦除前 App 会<b>自动留一份原图存档</b>，做错的题可以一键收进错题本。
+      期末复习时在错题本里勾选需要的题，直接拼成一份新卷子导出打印。
+    </p>
+
+    <h2 id="theme">五、换主题 / 深色模式</h2>
+    <p>
+      「设置」里有<b>六套配色</b>：爱马仕橙、西柚色、茶绿、马当、海雾、乔迪蓝，
+      每套都配了对应的深色方案。深色模式可以选「跟随系统 / 强制浅色 / 强制深色」。
+    </p>
+
+    <h2 id="update">六、检查更新</h2>
+    <p>
+      「设置 → 检查更新」会读取本站的 <code>version.json</code>，
+      有新版本时给出版本号和更新说明，并跳转到下载页。
+      整个检查过程<b>只读取一个静态 JSON 文件</b>，不上传任何设备信息。
+    </p>
+
+  </div>
+
+</div>
+</section>
+
+
+<footer class="site-foot">
+  <div class="wrap">
+    <div class="foot-grid">
+      <div>
+        <a href="./" class="logo" style="margin-bottom:10px">
+          <span class="logo-mark">轩</span>
+          <span class="logo-text">轩扫描<em>XuanScan</em></span>
+        </a>
+        <p style="margin:0;max-width:320px">拍一张试卷，去掉手写笔迹，还原成干净的空白卷。所有处理都在手机本地完成。</p>
+      </div>
+      <div>
+        <h4>产品</h4>
+        <ul>
+          <li><a href="./download.html">下载安装</a></li>
+          <li><a href="./docs.html">使用教程</a></li>
+          <li><a href="./faq.html">常见问题</a></li>
+          <li><a href="./changelog.html">更新日志</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>动态</h4>
+        <ul>
+          <li><a href="./feed.html">消息中心</a></li>
+          <li><a href="./app-preview.html">App 界面模拟</a></li>
+          <li><a href="./about.html">关于项目</a></li>
+        </ul>
+      </div>
+      <div>
+        <h4>开发者</h4>
+        <ul>
+          <li><a href="./api/v1/feed.json">feed.json</a></li>
+          <li><a href="./api/v1/version.json">version.json</a></li>
+          <li><a href="./api/v1/config.json">config.json</a></li>
+          <li><a href="https://github.com/eFreeLab/XuanScan" target="_blank" rel="noopener">源码仓库</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bar">
+      <span>轩扫描官方中枢 —— 版本公告、Bug 回复、更新自查、内测分发</span>
+      <span>本页由 GitHub Pages + Jekyll 自动构建 · 无后端 · 无 Cookie · 无统计脚本</span>
+    </div>
+  </div>
+</footer>
+
+<script>
+document.getElementById('menuBtn').onclick = function(){
+  document.getElementById('mainNav').classList.toggle('open');
+};
+</script>
+</body>
+</html>

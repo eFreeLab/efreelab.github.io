@@ -1,0 +1,65 @@
+---
+layout: default
+title: 消息中心
+nav: feed
+description: 轩扫描消息中心：版本发布、Bug 修复回复、新版本预告，App 每次启动拉取 feed.json 后展示的就是这些内容
+---
+
+{%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" -%}
+{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan' and p.xscan.type == 'release'" | sort: "date" | reverse -%}
+{%- assign rel = releases | first -%}
+{%- assign sorted = items | sort: "date" | reverse -%}
+
+<section class="section" style="padding-top:36px">
+<div class="wrap">
+
+  <div class="sec-head">
+    <h2>消息中心</h2>
+    <p>版本公告、Bug 回复、新版本预告都在这里 —— App 里「消息中心」显示的也是这份数据</p>
+  </div>
+
+  {% if rel %}
+  <div class="dl-hero" style="margin-bottom:26px">
+    <div class="dl-ver">当前最新版本</div>
+    <div class="dl-num">v{{ rel.xscan.version | default: '0.0.0' }}</div>
+    <div class="dl-date">{{ rel.date | date: "%Y-%m-%d" }} 发布 · 最低支持版本 {{ rel.xscan.minSupported | default: '0.0.0' }}</div>
+    <div class="dl-actions">
+      {% if rel.xscan.action.url %}<a class="btn btn-primary btn-lg" href="{{ rel.xscan.action.url }}">立即更新</a>{% endif %}
+      <a class="btn btn-ghost btn-lg" href="{{ '/download.html' | relative_url }}">全部下载渠道</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <h3 style="margin:26px 0 12px;font-size:17px">全部消息 <span style="color:var(--t3);font-weight:400">（{{ items | size }}）</span></h3>
+  <ul class="feed">
+  {% for p in sorted %}
+    {%- assign t = p.xscan.type | default: 'announce' -%}
+    <li class="feed-item{% if p.xscan.pinned %} pinned{% endif %}">
+      <div class="feed-tags">
+        {% if p.xscan.pinned %}<span class="tag">置顶</span>{% endif %}
+        <span class="tag {% if t == 'release' %}ok{% elsif t == 'prerelease' %}info{% elsif t == 'bugfix' %}warn{% elsif t == 'reply' %}mono{% else %}gray{% endif %}">{% if t == 'release' %}版本发布{% elsif t == 'prerelease' %}新版本预告{% elsif t == 'bugfix' %}问题修复{% elsif t == 'reply' %}反馈回复{% elsif t == 'notice' %}公告{% else %}公告{% endif %}</span>
+        {% if p.xscan.version %}<span class="tag gray">{{ p.xscan.version }}</span>{% endif %}
+        {% if p.xscan.severity == 'high' or p.xscan.severity == 'critical' %}<span class="tag" style="background:#FCEBEB;color:#E5484D">{{ p.xscan.severity }}</span>{% endif %}
+        {% if p.xscan.receipt %}<span class="tag mono">回执 {{ p.xscan.receipt }}</span>{% endif %}
+      </div>
+      <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+      <p>{{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+      <div class="date">{{ p.date | date: "%Y-%m-%d %H:%M" }}</div>
+    </li>
+  {% endfor %}
+  </ul>
+
+  <h3 style="margin:34px 0 12px;font-size:17px">给 App / 给开发者的端点</h3>
+  <div class="doc-body">
+    <table>
+      <tr><th>端点</th><th>用途</th></tr>
+      <tr><td><code>GET /api/v1/feed.json</code></td><td>消息流，App 轮询用</td></tr>
+      <tr><td><code>GET /api/v1/version.json</code></td><td>最新版本 + 分发渠道，更新自查用</td></tr>
+      <tr><td><code>GET /api/v1/config.json</code></td><td>远程开关（免费截止、功能降级等）</td></tr>
+      <tr><td><code>GET /api/v1/diag.json</code></td><td>云端诊断规则，改 JSON 全网生效，不用发版</td></tr>
+    </table>
+    <p style="margin:0;color:var(--t2)">这四个文件都由 Liquid 模板即时生成，写完文章 push 上去即可 —— 全程零后端、零数据库。</p>
+  </div>
+
+</div>
+</section>

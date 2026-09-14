@@ -1,0 +1,38 @@
+{
+  "v": 3,
+  "app": "xuanscan",
+  "phase": 0,
+  "freeUntil": "2027-06-30T23:59:59Z",
+  "minVersion": 0,
+  "killSwitch": false,
+  "offlineGraceDays": 7,
+  "notice": {
+    "title": "",
+    "body": "",
+    "url": "",
+    "level": "info"
+  },
+  "upgrade": {
+    "title": "升级商业版",
+    "body": "云端备份 · AI 免配置 · 优先支持",
+    "url": "https://efreelab.github.io/xuanscan/"
+  },
+  "endpoints": {
+    "_comment": "App 拉取顺序：按顺序并发探测，取最先成功者。全部失败则用上次缓存。",
+    "feed": [
+      "https://efreelab.github.io/api/v1/feed.json",
+      "https://cdn.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/feed.json",
+      "https://fastly.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/feed.json"
+    ],
+    "version": [
+      "https://efreelab.github.io/api/v1/version.json",
+      "https://cdn.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/version.json",
+      "https://fastly.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/version.json"
+    ],
+    "diag": [
+      "https://efreelab.github.io/api/v1/diag.json",
+      "https://cdn.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/diag.json",
+      "https://fastly.jsdelivr.net/gh/efreelab/efreelab.github.io@master/api/v1/diag.json"
+    ]
+  }
+}

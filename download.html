@@ -1,0 +1,90 @@
+---
+layout: default
+title: 下载
+nav: download
+description: 轩扫描 XuanScan 内测版下载：Android APK、蓝奏云与 GitHub Releases 双渠道、安装步骤与风险提示说明
+---
+
+{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan' and p.xscan.type == 'release'" | sort: "date" | reverse -%}
+{%- assign rel = releases | first -%}
+
+<section class="section" style="padding-top:36px">
+<div class="wrap">
+
+  <div class="sec-head">
+    <h2>下载轩扫描</h2>
+    <p>内测版免费使用，安装即用，不需要注册账号</p>
+  </div>
+
+  {% if rel %}
+  <div class="dl-hero">
+    <div class="dl-ver">当前版本</div>
+    <div class="dl-num">v{{ rel.xscan.version | default: '0.0.0' }}</div>
+    <div class="dl-date">{{ rel.date | date: "%Y-%m-%d" }} 发布 · Android 7.0 及以上</div>
+    <div class="dl-actions">
+      {% if rel.xscan.action.url %}<a class="btn btn-primary btn-lg" href="{{ rel.xscan.action.url }}">立即下载 APK</a>{% endif %}
+      <a class="btn btn-ghost btn-lg" href="{{ '/changelog.html' | relative_url }}">看看更新了什么</a>
+    </div>
+  </div>
+  {% endif %}
+
+  <h3 style="margin:34px 0 12px;font-size:17px">下载渠道</h3>
+  <ul class="ch-list">
+    <li>
+      <span class="name">蓝奏云</span>
+      <span class="note">推荐 —— 国内直连，不限速，不用挂梯子</span>
+      <span class="tag ok">推荐</span>
+      <a class="btn btn-primary btn-sm" href="https://efreelab.lanzoub.com/" target="_blank" rel="noopener">前往下载</a>
+    </li>
+    <li>
+      <span class="name">GitHub Releases</span>
+      <span class="note">蓝奏云打不开、或人在海外时用它</span>
+      <span class="tag gray">备用</span>
+      <a class="btn btn-ghost btn-sm" href="https://github.com/eFreeLab/XuanScan/releases" target="_blank" rel="noopener">前往下载</a>
+    </li>
+  </ul>
+
+  <h3 style="margin:34px 0 12px;font-size:17px">安装步骤</h3>
+  <div class="steps" style="margin-bottom:8px">
+    <div class="step">
+      <h3>下载 APK</h3>
+      <p>用手机浏览器打开上面的渠道链接，点下载。文件很小，一般几秒就好。</p>
+    </div>
+    <div class="step">
+      <h3>允许「安装未知应用」</h3>
+      <p>首次安装时系统会拦一下，按提示给<b>当前这个浏览器</b>开一次权限即可（只针对这个 App，不是全局开关）。</p>
+    </div>
+    <div class="step">
+      <h3>装好，给相机权限</h3>
+      <p>打开轩扫描，第一次拍照时点「允许」。照片只会存到你自己的手机里。</p>
+    </div>
+  </div>
+
+  <div class="warn-box" style="margin-top:22px">
+    <b>安装时提示「风险应用 / 病毒」？</b><br>
+    这是 Android 对<b>「非应用商店来源的 APK」的统一提示</b>，不是轩扫描被检测出病毒。
+    只要你是从本页面提供的两个渠道下载的，就可以放心继续安装。
+    <br><br>
+    想更放心：装完后用手机管家、或者把 APK 传到
+    <a href="https://www.virustotal.com/" target="_blank" rel="noopener">VirusTotal</a>
+    扫一遍即可。轩扫描<b>不使用任何加固壳、不动态加载代码</b>，就是为了不触发这类误报。
+    更详细的说明见<a href="{{ '/faq.html' | relative_url }}">常见问题</a>。
+  </div>
+
+  <h3 style="margin:34px 0 12px;font-size:17px">系统要求</h3>
+  <div class="doc-body">
+    <table>
+      <tr><th>项目</th><th>要求</th></tr>
+      <tr><td>系统版本</td><td>Android 7.0（API 24）及以上</td></tr>
+      <tr><td>存储空间</td><td>安装包约 8 MB，建议预留 200 MB 放扫描件</td></tr>
+      <tr><td>必需权限</td><td>相机（拍照）、读取相册（导入已有照片）</td></tr>
+      <tr><td>不需要</td><td>账号注册、联网（除检查更新）、通讯录、定位、短信</td></tr>
+    </table>
+    <div class="tip">
+      <b>鸿蒙 HarmonyOS 用户：</b>目前提供的是 Android APK，HarmonyOS 4 及以下一般可直接安装；
+      纯血鸿蒙（HarmonyOS NEXT）暂不支持，后续会评估。
+    </div>
+  </div>
+
+</div>
+</section>

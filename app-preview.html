@@ -1,0 +1,171 @@
+---
+layout: default
+title: App 模拟
+description: 用 Jekyll 生成的 feed.json，在网页里模拟轩扫描 App 内「消息中心」的渲染效果，可切换六主题与深浅色
+---
+
+{%- assign sorted = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | sort: "date" | reverse -%}
+
+<style>
+/* 注意：所有主题变量都挂在 #appStage 上，不污染站点自身的样式 */
+#appStage{
+  --ui:#F26B14; --ui-d:#D55A0B; --ui-l:#FF9A4D;
+  --ui-bg:#FFF5EE; --ui-bg2:#FFE8D6; --ui-bd:#FFD5B8; --ui-tint:#7A3D0C;
+  --page:#F5F6F8; --card:#FFFFFF; --divider:#EBECF0;
+  --t1:#1A1A1E; --t2:#6E7180; --t3:#A0A3AD;
+}
+#appStage[data-theme="grapefruit"]{--ui:#F56B6B;--ui-d:#E04F58;--ui-l:#FFA3A3;--ui-bg:#FFF2F2;--ui-bg2:#FFE3E5;--ui-bd:#FFCFD2;--ui-tint:#7A2B33}
+#appStage[data-theme="tea"]{--ui:#65942F;--ui-d:#577F28;--ui-l:#A0BD7E;--ui-bg:#F4F8F0;--ui-bg2:#EBF1E4;--ui-bd:#E0EAD5;--ui-tint:#304717}
+#appStage[data-theme="madang"]{--ui:#3A9C4D;--ui-d:#328642;--ui-l:#85C291;--ui-bg:#F1F8F3;--ui-bg2:#E5F2E8;--ui-bd:#D8EBDB;--ui-tint:#1C4B25}
+#appStage[data-theme="seafog"]{--ui:#3F9292;--ui-d:#367E7E;--ui-l:#88BBBB;--ui-bg:#F2F7F7;--ui-bg2:#E6F1F1;--ui-bd:#D9E9E9;--ui-tint:#1E4646}
+#appStage[data-theme="jordy"]{--ui:#4D8FD5;--ui-d:#427BB7;--ui-l:#91BAE5;--ui-bg:#F3F7FC;--ui-bg2:#E8F0FA;--ui-bd:#DBE9F7;--ui-tint:#254566}
+#appStage[data-mode="dark"]{
+  --page:#0E0E11; --card:#1A1A1F; --divider:#2A2A30;
+  --t1:#F2F2F5; --t2:#B0B3BD; --t3:#7E8189;
+}
+#appStage[data-mode="dark"][data-theme="orange"]{--ui:#FF8A3D;--ui-d:#F26B14;--ui-l:#FFA56A;--ui-bg:#3A1F12;--ui-bg2:#2A1810;--ui-bd:#5A3020;--ui-tint:#FFD9C2}
+#appStage[data-mode="dark"][data-theme="grapefruit"]{--ui:#FF7A8A;--ui-d:#F25B6B;--ui-l:#FFA3B3;--ui-bg:#3A1820;--ui-bg2:#2A1218;--ui-bd:#5A2832;--ui-tint:#FFD3DA}
+#appStage[data-mode="dark"][data-theme="tea"]{--ui:#A3E44E;--ui-d:#65942F;--ui-l:#B9E77E;--ui-bg:#2A3715;--ui-bg2:#202A10;--ui-bd:#455C21;--ui-tint:#E9F0E2}
+#appStage[data-mode="dark"][data-theme="madang"]{--ui:#54DE6B;--ui-d:#3A9C4D;--ui-l:#83E293;--ui-bg:#17351B;--ui-bg2:#122915;--ui-bd:#25582B;--ui-tint:#E3F1E6}
+#appStage[data-mode="dark"][data-theme="seafog"]{--ui:#5AD8D4;--ui-d:#3F9292;--ui-l:#88DDDA;--ui-bg:#193332;--ui-bg2:#132726;--ui-bd:#285551;--ui-tint:#E4F0F0}
+#appStage[data-mode="dark"][data-theme="jordy"]{--ui:#71B4F3;--ui-d:#4D8FD5;--ui-l:#A3CDF4;--ui-bg:#12283A;--ui-bg2:#0E1F2D;--ui-bd:#1C4361;--ui-tint:#E6EFF9}
+
+.app-preview{background:#E7E9EE; color:#1A1A1E;
+ font-family:"PingFang SC","Microsoft YaHei",system-ui,-apple-system,sans-serif;
+ display:flex;gap:28px;justify-content:center;padding:24px;flex-wrap:wrap;
+ margin:14px -16px; border-radius:0}
+.app-preview *{box-sizing:border-box}
+.note{max-width:300px;font-size:13px;line-height:1.8;color:#4b4f57}
+.note h2{font-size:16px;margin:0 0 10px}
+.note code{background:#fff;padding:1px 5px;border-radius:5px;font-size:12px}
+.sw{display:flex;gap:8px;margin:10px 0 16px;flex-wrap:wrap}
+.sw button{width:30px;height:30px;border-radius:50%;border:2px solid #fff;cursor:pointer;padding:0}
+.sw button.on{box-shadow:0 0 0 2px #333}
+.mode{display:flex;gap:6px;margin-bottom:14px}
+.mode button{border:none;border-radius:14px;padding:6px 14px;cursor:pointer;font-size:13px;background:#fff;color:#333}
+.mode button.on{background:#333;color:#fff}
+
+.phone{width:330px;height:680px;background:var(--page);border-radius:34px;
+ border:9px solid #222;box-shadow:0 18px 50px rgba(0,0,0,.28);overflow:hidden;display:flex;flex-direction:column}
+.bar{height:52px;display:flex;align-items:center;padding:0 14px;background:var(--card);
+ border-bottom:1px solid var(--divider);font-size:16px;font-weight:600;flex:none}
+.bar span.red{width:8px;height:8px;border-radius:50%;background:#E5484D;margin-left:6px;display:inline-block}
+.pbody{flex:1;overflow-y:auto;padding:12px}
+.beta{background:var(--ui-bg);color:var(--ui-tint);border-radius:12px;padding:8px 11px;font-size:12px;margin-bottom:10px;display:flex;align-items:center;gap:7px}
+.beta i{width:6px;height:6px;border-radius:50%;background:var(--ui);display:inline-block}
+.item{background:var(--card);border-radius:16px;padding:13px;margin-bottom:10px}
+.item.pinned{border:1px solid var(--ui-bd);background:var(--ui-bg2)}
+.tag{display:inline-block;padding:2px 8px;border-radius:10px;font-size:11px;margin:0 5px 5px 0;background:var(--ui-bg);color:var(--ui-tint)}
+.tag.release{background:#E8F7EE;color:#166534}
+.tag.prerelease{background:#E8F1FF;color:#1E40AF}
+.tag.bugfix{background:#FFF4E5;color:#92400E}
+.tag.reply{background:#F2EEFF;color:#5B21B6}
+.tag.notice{background:#F1F3F5;color:#475569}
+.tag.pinned{background:var(--ui);color:#fff}
+.tag.sev{background:#FCEBEB;color:#E5484D}
+.tag.rec{background:#F2EEFF;color:#5B21B6;font-family:monospace}
+.t{font-size:15px;font-weight:600;line-height:1.45;margin:2px 0 4px}
+.s{font-size:13px;color:var(--t2);line-height:1.6}
+.d{font-size:11.5px;color:var(--t3);margin-top:7px}
+.upd{margin-top:9px;background:var(--ui);color:#fff;border:none;border-radius:18px;padding:7px 18px;font-size:13px;font-weight:600;cursor:pointer}
+.tabs{height:56px;background:var(--card);border-top:1px solid var(--divider);display:flex;flex:none}
+.tabs div{flex:1;display:flex;flex-direction:column;align-items:center;justify-content:center;font-size:11px;color:var(--t3);gap:3px}
+.tabs div.on{color:var(--ui)}
+.dot{width:26px;height:26px;border-radius:9px;background:var(--divider);display:block}
+.tabs div.on .dot{background:var(--ui)}
+@media (max-width:520px){ .app-preview{padding:14px 8px; margin:14px -8px} .phone{width:100%;max-width:330px} }
+</style>
+
+<div id="appStage" class="app-preview" data-theme="orange" data-mode="light">
+
+  <div class="note">
+    <h2>这是 App 内「消息中心」的模拟</h2>
+    <p>数据直接来自 Jekyll 生成的 <code>feed.json</code>，也就是 App 每次启动拉取的那份。</p>
+    <div class="mode">
+      <button class="on" data-m="light">浅色</button>
+      <button data-m="dark">深色</button>
+    </div>
+    <div class="sw">
+      <button class="on" data-t="orange" style="background:#F26B14" title="爱马仕橙"></button>
+      <button data-t="grapefruit" style="background:#F56B6B" title="西柚色"></button>
+      <button data-t="tea" style="background:#65942F" title="茶绿色"></button>
+      <button data-t="madang" style="background:#3A9C4D" title="马当色"></button>
+      <button data-t="seafog" style="background:#3F9292" title="海雾色"></button>
+      <button data-t="jordy" style="background:#4D8FD5" title="乔迪蓝"></button>
+    </div>
+    <p><b>看点：</b></p>
+    <p>· 置顶项（v0.1.0 发布 / v0.2.0 预告）排在最前且高亮</p>
+    <p>· 「严重度 high」的修复条目有红标</p>
+    <p>· 带 <b>回执码</b> 的那条，只有对应用户的 App 会强提醒</p>
+    <p>· 「立即更新」按钮读的是 <code>action.url</code></p>
+    <p style="color:#8a8f98">真机上的渲染由 Compose 完成，这里只是把同一份 JSON 用同样的 token 画出来，用于确认信息层级。</p>
+  </div>
+
+  <div class="phone">
+    <div class="bar">消息中心<span class="red"></span></div>
+    <div class="pbody">
+      <div class="beta"><i></i>内测版 · 仅供开发测试，正式使用请升级商业版</div>
+      <div id="list"></div>
+    </div>
+    <div class="tabs">
+      <div class="on"><span class="dot"></span>扫描</div>
+      <div><span class="dot"></span>文件</div>
+      <div><span class="dot"></span>消息</div>
+      <div><span class="dot"></span>我的</div>
+    </div>
+  </div>
+
+</div>
+
+<script>
+var FEED = [
+{% for p in sorted %}  {
+    "type": {{ p.xscan.type | default: 'announce' | jsonify }},
+    "title": {{ p.title | jsonify }},
+    "summary": {{ p.xscan.summary | jsonify }},
+    "date": {{ p.date | date: "%Y-%m-%d %H:%M" | jsonify }},
+    "version": {{ p.xscan.version | default: '' | jsonify }},
+    "severity": {{ p.xscan.severity | default: 'normal' | jsonify }},
+    "receipt": {{ p.xscan.receipt | default: '' | jsonify }},
+    "pinned": {% if p.xscan.pinned %}true{% else %}false{% endif %},
+    "url": {{ p.url | jsonify }}
+  }{% unless forloop.last %},{% endunless %}
+{% endfor %}];
+
+var LABEL = {release:'版本发布',prerelease:'新版本预告',bugfix:'问题修复',reply:'反馈回复',notice:'公告',announce:'公告'};
+function esc(s){return String(s==null?'':s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;')}
+function render(){
+  FEED.sort(function(a,b){ return (b.pinned?1:0) - (a.pinned?1:0); });
+  var h='';
+  FEED.forEach(function(it){
+    var tags='';
+    if(it.pinned) tags+='<span class="tag pinned">置顶</span>';
+    tags+='<span class="tag '+it.type+'">'+LABEL[it.type]+'</span>';
+    if(it.version) tags+='<span class="tag">'+esc(it.version)+'</span>';
+    if(it.severity==='high'||it.severity==='critical') tags+='<span class="tag sev">'+it.severity+'</span>';
+    if(it.receipt) tags+='<span class="tag rec">回执 '+esc(it.receipt)+'</span>';
+    var btn = it.type==='bugfix'||it.type==='release' ? '<button class="upd">立即更新</button>' : '';
+    h+='<div class="item'+(it.pinned?' pinned':'')+'">'+tags
+      +'<div class="t">'+esc(it.title)+'</div>'
+      +'<div class="s">'+esc(it.summary)+'</div>'
+      +'<div class="d">'+esc(it.date)+'</div>'+btn+'</div>';
+  });
+  document.getElementById('list').innerHTML=h;
+}
+render();
+var stage = document.getElementById('appStage');
+Array.prototype.forEach.call(document.querySelectorAll('.sw button'), function(b){
+  b.onclick=function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.sw button'), function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    stage.setAttribute('data-theme', b.getAttribute('data-t'));
+  };
+});
+Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function(b){
+  b.onclick=function(){
+    Array.prototype.forEach.call(document.querySelectorAll('.mode button'), function(x){x.classList.remove('on')});
+    b.classList.add('on');
+    stage.setAttribute('data-mode', b.getAttribute('data-m'));
+  };
+});
+</script>

@@ -1,0 +1,47 @@
+---
+layout: default
+---
+<article class="post">
+  <div class="post-head">
+    {% if page.xscan.pinned %}<span class="tag tag-pinned">置顶</span>{% endif %}
+    {%- assign _t = page.xscan.type | default: 'announce' -%}
+    <span class="tag tag-{{ _t }}">{% if _t == 'release' %}版本发布{% elsif _t == 'prerelease' %}新版本预告{% elsif _t == 'bugfix' %}问题修复{% elsif _t == 'reply' %}反馈回复{% elsif _t == 'notice' %}公告{% else %}公告{% endif %}</span>
+    {% if page.xscan.version %}<span class="tag tag-version">{{ page.xscan.version }}</span>{% endif %}
+    {% if page.xscan.severity == 'high' or page.xscan.severity == 'critical' %}
+    <span class="tag tag-sev">严重度 {{ page.xscan.severity }}</span>{% endif %}
+  </div>
+
+  <h1>{{ page.title }}</h1>
+  <p class="post-meta">{{ page.date | date: "%Y-%m-%d %H:%M" }} · {{ site.title }}</p>
+
+  {% if page.xscan.summary %}
+  <div class="post-summary">{{ page.xscan.summary }}</div>
+  {% endif %}
+
+  {{ content }}
+
+  {% if page.xscan.receipt %}
+  <div class="receipt-box">
+    <div class="receipt-label">本条为回执回复</div>
+    <div class="receipt-code">{{ page.xscan.receipt }}</div>
+    <div class="receipt-hint">提交反馈时生成过这个回执码的用户，App 端会收到「你的反馈有回复了」提醒。</div>
+  </div>
+  {% endif %}
+
+  {% if page.xscan.action.type == 'update' and page.xscan.action.url %}
+  <a class="btn-primary" href="{{ page.xscan.action.url }}">立即更新</a>
+  {% endif %}
+
+  {% if page.xscan.channels %}
+  <div class="channels">
+    <h3>下载渠道</h3>
+    <ul>
+    {% for c in page.xscan.channels %}
+      <li><a href="{{ c.url }}">{{ c.name }}</a>{% if c.note %} <span class="dim">—— {{ c.note }}</span>{% endif %}</li>
+    {% endfor %}
+    </ul>
+  </div>
+  {% endif %}
+
+  <p class="back"><a href="{{ '/' | relative_url }}">← 返回消息中心</a></p>
+</article>

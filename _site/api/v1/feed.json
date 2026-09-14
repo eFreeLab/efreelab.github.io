@@ -1,0 +1,98 @@
+{
+  "v": 1,
+  "app": "xuanscan",
+  "generated": "2026-09-13T20:04:47+08:00",
+  "count": 5,
+  "items": [
+    {
+      "id": "xuanscan-010",
+      "type": "release",
+      "title": "轩扫描内测版 v0.1.0 发布",
+      "summary": "首个内测版本：相机扫描、手动四角微调、PNG 导出。",
+      "url": "/2026/09/13/xuanscan-010/",
+      "date": "2026-09-13T10:00:00+08:00",
+      "version": "0.1.0",
+      "minVersion": "0.1.0",
+      "fixVersion": "",
+      "severity": "normal",
+      "receipt": null,
+      "pinned": true,
+      "action": {
+        "type": "update",
+        "url": "https://efreelab.github.io/xuanscan/"
+      }
+    },
+    {
+      "id": "xuanscan-020-preview",
+      "type": "prerelease",
+      "title": "v0.2.0 预告：自动边缘检测要来了",
+      "summary": "自动找纸张四角、去阴影、光照不均校正，预计两周内进内测。",
+      "url": "/2026/09/12/xuanscan-020-preview/",
+      "date": "2026-09-12T15:00:00+08:00",
+      "version": "0.2.0",
+      "minVersion": "",
+      "fixVersion": "",
+      "severity": "normal",
+      "receipt": null,
+      "pinned": true,
+      "action": {
+        "type": "none",
+        "url": ""
+      }
+    },
+    {
+      "id": "xuanscan-011-fix",
+      "type": "bugfix",
+      "title": "已修复：部分机型拍照后图片旋转 90 度",
+      "summary": "小米 / 红米部分机型竖拍后预览横躺，已在 0.1.1 修复，请更新。",
+      "url": "/2026/09/11/xuanscan-011-fix/",
+      "date": "2026-09-11T11:30:00+08:00",
+      "version": "0.1.1",
+      "minVersion": "0.1.0",
+      "fixVersion": "0.1.1",
+      "severity": "high",
+      "receipt": null,
+      "pinned": false,
+      "action": {
+        "type": "update",
+        "url": "https://efreelab.github.io/xuanscan/"
+      }
+    },
+    {
+      "id": "about-antivirus-warning",
+      "type": "notice",
+      "title": "关于安装时提示「风险应用」的说明",
+      "summary": "为什么手机会提示风险，以及我们为此做了什么、没做什么。",
+      "url": "/2026/09/09/about-antivirus-warning/",
+      "date": "2026-09-09T09:00:00+08:00",
+      "version": "",
+      "minVersion": "",
+      "fixVersion": "",
+      "severity": "normal",
+      "receipt": null,
+      "pinned": false,
+      "action": {
+        "type": "none",
+        "url": ""
+      }
+    },
+    {
+      "id": "reply-8F3K2Q",
+      "type": "reply",
+      "title": "回复：扫描件能不能直接存成 PDF",
+      "summary": "能。PDF 导出排在 M2，且不用引入任何 GPL 依赖。",
+      "url": "/2026/09/08/reply-8F3K2Q/",
+      "date": "2026-09-08T20:10:00+08:00",
+      "version": "",
+      "minVersion": "",
+      "fixVersion": "",
+      "severity": "normal",
+      "receipt": "8F3K2Q",
+      "pinned": false,
+      "action": {
+        "type": "none",
+        "url": ""
+      }
+    }
+  ]
+}

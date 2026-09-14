@@ -1,0 +1,43 @@
+---
+layout: default
+title: 更新日志
+nav: changelog
+description: 轩扫描 XuanScan 更新日志：按版本倒序列出新增功能、修复问题与已知问题
+---
+
+{%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | sort: "date" | reverse -%}
+
+<section class="section" style="padding-top:36px">
+<div class="wrap">
+
+  <div class="sec-head">
+    <h2>更新日志</h2>
+    <p>新增、修复、预告，按时间倒序。App 里「设置 → 检查更新」读的也是这份数据</p>
+  </div>
+
+  <div class="log">
+  {% for p in items %}
+    {%- assign t = p.xscan.type | default: 'announce' -%}
+    <div class="log-item">
+      <div class="meta">
+        {% if p.xscan.version %}<span class="v">v{{ p.xscan.version }}</span>{% endif %}
+        <span class="tag {% if t == 'release' %}ok{% elsif t == 'prerelease' %}info{% elsif t == 'bugfix' %}warn{% elsif t == 'reply' %}mono{% else %}gray{% endif %}">{% if t == 'release' %}版本发布{% elsif t == 'prerelease' %}预告{% elsif t == 'bugfix' %}问题修复{% elsif t == 'reply' %}反馈回复{% else %}公告{% endif %}</span>
+        {% if p.xscan.severity == 'high' or p.xscan.severity == 'critical' %}<span class="tag" style="background:#FCEBEB;color:#E5484D">严重 {{ p.xscan.severity }}</span>{% endif %}
+        {% if p.xscan.pinned %}<span class="tag">置顶</span>{% endif %}
+        <span class="date">{{ p.date | date: "%Y-%m-%d" }}</span>
+      </div>
+      <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
+      <p>{{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+      <a class="btn btn-ghost btn-sm" href="{{ p.url | relative_url }}">查看全文</a>
+    </div>
+  {% endfor %}
+  </div>
+
+  <div class="tip" style="margin-top:8px">
+    <b>开发者：</b>本页内容直接来自 <code>_posts/</code> 目录下的 Markdown 文章，
+    新增一篇 <code>type: release</code> 的文章、push 到 GitHub，这里和 App 的消息中心会同时更新，
+    无需改代码、无需发版。
+  </div>
+
+</div>
+</section>

@@ -1,0 +1,33 @@
+---
+layout: none
+sitemap: false
+---
+{%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" -%}
+{
+  "v": 1,
+  "app": "xuanscan",
+  "generated": {{ site.time | date_to_xmlschema | jsonify }},
+  "count": {{ items | size }},
+  "items": [
+{%- for p in items %}
+    {
+      "id": {{ p.slug | jsonify }},
+      "type": {{ p.xscan.type | default: "announce" | jsonify }},
+      "title": {{ p.title | jsonify }},
+      "summary": {{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 120 | jsonify }},
+      "url": {{ p.url | absolute_url | jsonify }},
+      "date": {{ p.date | date_to_xmlschema | jsonify }},
+      "version": {{ p.xscan.version | default: "" | jsonify }},
+      "minVersion": {{ p.xscan.minVersion | default: "" | jsonify }},
+      "fixVersion": {{ p.xscan.fixVersion | default: "" | jsonify }},
+      "severity": {{ p.xscan.severity | default: "normal" | jsonify }},
+      "receipt": {% if p.xscan.receipt %}{{ p.xscan.receipt | jsonify }}{% else %}null{% endif %},
+      "pinned": {{ p.xscan.pinned | default: false }},
+      "action": {
+        "type": {{ p.xscan.action.type | default: "none" | jsonify }},
+        "url": {{ p.xscan.action.url | default: "" | jsonify }}
+      }
+    }{% unless forloop.last %},{% endunless %}
+{%- endfor %}
+  ]
+}
