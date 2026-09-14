@@ -5,7 +5,7 @@ nav: download
 description: 轩扫描 XuanScan 内测版下载：Android APK、蓝奏云与 GitHub Releases 双渠道、安装步骤与风险提示说明
 ---
 
-{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan' and p.xscan.type == 'release'" | sort: "date" | reverse -%}
+{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | where_exp: "p", "p.xscan.type == 'release'" | sort: "date" | reverse -%}
 {%- assign rel = releases | first -%}
 
 <section class="section" style="padding-top:36px">

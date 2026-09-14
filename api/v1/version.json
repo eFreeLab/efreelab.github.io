@@ -7,7 +7,7 @@ sitemap: false
   Jekyll 无法直接比较版本号大小，因此按日期排序 —— 发布新版本时把 date 写最新即可。
   App 端自行解析版本号字符串比较（Kotlin 三行代码），故此处只输出字符串。
 {%- endcomment -%}
-{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan' and p.xscan.type == 'release'" | sort: "date" | reverse -%}
+{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | where_exp: "p", "p.xscan.type == 'release'" | sort: "date" | reverse -%}
 {%- assign rel = releases | first -%}
 {
   "v": 1,

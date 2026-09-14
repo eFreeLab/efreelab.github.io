@@ -6,7 +6,7 @@ description: 轩扫描消息中心：版本发布、Bug 修复回复、新版本
 ---
 
 {%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" -%}
-{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan' and p.xscan.type == 'release'" | sort: "date" | reverse -%}
+{%- assign releases = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | where_exp: "p", "p.xscan.type == 'release'" | sort: "date" | reverse -%}
 {%- assign rel = releases | first -%}
 {%- assign sorted = items | sort: "date" | reverse -%}
 
