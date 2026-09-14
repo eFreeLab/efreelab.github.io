@@ -27,7 +27,7 @@ description: 轩扫描 XuanScan 更新日志：按版本倒序列出新增功能
         <span class="date">{{ p.date | date: "%Y-%m-%d" }}</span>
       </div>
       <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
-      <p>{{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 160 }}</p>
+      <p>{% if p.xscan.summary %}{{ p.xscan.summary | strip_html | strip_newlines | truncate: 160 }}{% else %}{{ p.excerpt | strip_html | strip_newlines | truncate: 160 }}{% endif %}</p>
       <a class="btn btn-ghost btn-sm" href="{{ p.url | relative_url }}">查看全文</a>
     </div>
   {% endfor %}

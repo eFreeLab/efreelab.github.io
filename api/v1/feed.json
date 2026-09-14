@@ -14,7 +14,7 @@ sitemap: false
       "id": {{ p.slug | jsonify }},
       "type": {{ p.xscan.type | default: "announce" | jsonify }},
       "title": {{ p.title | jsonify }},
-      "summary": {{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 120 | jsonify }},
+      "summary": {% if p.xscan.summary %}{{ p.xscan.summary | strip_html | strip_newlines | truncate: 120 | jsonify }}{% else %}{{ p.excerpt | strip_html | strip_newlines | truncate: 120 | jsonify }}{% endif %},
       "url": {{ p.url | absolute_url | jsonify }},
       "date": {{ p.date | date_to_xmlschema | jsonify }},
       "version": {{ p.xscan.version | default: "" | jsonify }},

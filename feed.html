@@ -43,7 +43,7 @@ description: 轩扫描消息中心：版本发布、Bug 修复回复、新版本
         {% if p.xscan.receipt %}<span class="tag mono">回执 {{ p.xscan.receipt }}</span>{% endif %}
       </div>
       <h3><a href="{{ p.url | relative_url }}">{{ p.title }}</a></h3>
-      <p>{{ p.xscan.summary | default: p.excerpt | strip_html | strip_newlines | truncate: 120 }}</p>
+      <p>{% if p.xscan.summary %}{{ p.xscan.summary | strip_html | strip_newlines | truncate: 120 }}{% else %}{{ p.excerpt | strip_html | strip_newlines | truncate: 120 }}{% endif %}</p>
       <div class="date">{{ p.date | date: "%Y-%m-%d %H:%M" }}</div>
     </li>
   {% endfor %}
