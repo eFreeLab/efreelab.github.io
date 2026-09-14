@@ -1,0 +1,38 @@
+# ============================================================
+# 轩扫描官方中枢 · Git 忽略规则
+#
+# ⚠️ 这次构建失败的根因就是缺了本文件：
+#   _site/ 是 Jekyll 的构建产物目录（Destination），
+#   之前被整体提交进仓库，导致：
+#     1) 源目录里混入 20+ 个上一轮的 HTML/JSON 产物
+#     2) 产物路径与源文件输出路径完全重合
+#        （例：_site/2026/09/08/reply-8F3K2Q/index.html
+#          ←→ _posts/2026-09-08-reply-8F3K2Q.md 的输出）
+#     3) GitHub Pages 构建时 Destination 在 Source 内部，
+#        读写互相打架 → 构建中断
+#   产物绝不能进版本库，每次 push 只应包含源文件。
+# ============================================================
+
+# Jekyll 构建产物
+_site/
+.jekyll-cache/
+.jekyll-metadata
+.sass-cache/
+
+# 本地预览脚本的缓存
+scripts/__pycache__/
+__pycache__/
+*.py[cod]
+
+# Ruby 依赖锁（GitHub Pages 不需要，且易与官方 gem 版本冲突）
+Gemfile.lock
+vendor/
+.bundle/
+
+# 编辑器 / 系统垃圾
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
