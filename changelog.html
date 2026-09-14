@@ -3,6 +3,7 @@ layout: default
 title: 更新日志
 nav: changelog
 description: 轩扫描 XuanScan 更新日志：按版本倒序列出新增功能、修复问题与已知问题
+permalink: /changelog.html
 ---
 
 {%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" | sort: "date" | reverse -%}

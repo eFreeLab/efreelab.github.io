@@ -3,6 +3,7 @@ layout: default
 title: 消息中心
 nav: feed
 description: 轩扫描消息中心：版本发布、Bug 修复回复、新版本预告，App 每次启动拉取 feed.json 后展示的就是这些内容
+permalink: /feed.html
 ---
 
 {%- assign items = site.posts | where_exp: "p", "p.xscan.app == 'xuanscan'" -%}
